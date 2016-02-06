@@ -17,7 +17,6 @@ init: function(){
 
 //method on app called send
 send: function(message){
-
   $.ajax({
   // This is the url you should use to communicate with the parse API server.
   url: 'https://api.parse.com/1/classes/chatterbox',
@@ -55,24 +54,45 @@ fetch : function(){
 },
 
 clearMessages: function(){
+//we'll set this up like a queue so only latest x number of messages are displayed
   $("#chats").empty();
 },
 
-addMessages: function(message){
-  $("#chats").append('<p>' + message + '</p>');
+addMessages: function(){
+//write new messages
+//take in message data
+//call the send function we made to send message data to server
+//connect this function to submit button so it fires upon button click
+//if user enters a new roomname, it will auto add to dropdown menu
+
 },
 
 createRoom: function(){
-  //remember to add in new room name to dropdown select
+//display messages on DOM to make chat room
+//call the fetch function so we can populate chat room with messages 
+//grab room name property from user created message data
+//compare room names, if unique new roomname
+//remember to add in new room name to dropdown select
+//make roomnames in dropdown clickable 
+//"room" will correspond to all matching roomname properties from messages
+  $("#chats").append('<p>' + message + '</p>');
   $('#createRoom').append('<p>' + roomName + '</p>');
 },
 
 enterRoom: function(){
+//allow users to enter existing rooms
+//select from dropdown menu
+//when user clicks on room name, all messages with matching roomname value are displayed
 
 },
 
 addFriend: function(){
+//make an empty user friend list
+//click on username to add to friend list
 
+},
+showFriendMessages: function(){
+//display all messages from users on friend list in bold 
 },
 };
 app.addMessages(message);
