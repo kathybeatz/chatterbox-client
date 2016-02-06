@@ -1,22 +1,25 @@
 
-
-var message = {
-  username: 'kat&liz',
-  text: 'hi everybody',
-  roomname: 'telegraphtearoom'
-};
+$(document).ready.(function(){
+// var message = {
+//   username: 'kat&liz',
+//   text: 'hi everybody',
+//   roomname: 'telegraphtearoom'
+// };
 
 //have an object named app
 var app = {
-
-
+roomName = undefined;
+friendsList = {};
 //metod on app called, init
 init: function(){
-  
+  // app.createRoom();
+  app.addMessages();
+  // app.clearMessages();
+  // }
 },
-
+},
 //method on app called send
-send: function(message){
+send: function(){
   $.ajax({
   // This is the url you should use to communicate with the parse API server.
   url: 'https://api.parse.com/1/classes/chatterbox',
@@ -64,7 +67,14 @@ addMessages: function(){
 //call the send function we made to send message data to server
 //connect this function to submit button so it fires upon button click
 //if user enters a new roomname, it will auto add to dropdown menu
-
+// app.send();
+  $('#chatButton').on('click', function(){
+    var message {};
+    message.username = window.location.search.slice(10);
+    message.text = $("#messageInput").val;
+    message.roomname = app.roomName;
+    app.send(message);
+  });
 },
 
 createRoom: function(){
@@ -75,7 +85,8 @@ createRoom: function(){
 //remember to add in new room name to dropdown select
 //make roomnames in dropdown clickable 
 //"room" will correspond to all matching roomname properties from messages
-  $("#chats").append('<p>' + message + '</p>');
+app.fetch();
+  $("#chats").append('<p>' + username + ': <br>' + message + '</p>');
   $('#createRoom').append('<p>' + roomName + '</p>');
 },
 
@@ -94,5 +105,6 @@ addFriend: function(){
 showFriendMessages: function(){
 //display all messages from users on friend list in bold 
 },
-};
-app.addMessages(message);
+
+app.init();
+});

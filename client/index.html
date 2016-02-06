@@ -7,8 +7,8 @@
 
     <!-- dependencies -->
     <script src="bower_components/jquery/jquery.min.js"></script>
-    <script src="bower_components/underscore/underscore.min.js"></script>
-    <script src="bower_components/backbone/backbone.min.js"></script>
+    <script src="bower_components/underscore/underscore-min.js"></script>
+    <script src="bower_components/backbone/backbone-min.js"></script>
     <!-- your scripts -->
     <script src="env/config.js"></script>
     <script src="scripts/app.js"></script>
@@ -17,23 +17,27 @@
     <div id="main">
       <h1>Chatter Box</h1>
       
+      <form id="messageForm">
+        <input id="messageInput" type="text" placeholder="Type message here">
+      </form>
+      <button class="chatButton">Submit</button>
 
       <!-- Messages !-->
       <div id="chats">
+      
         
+      </div>
+
       <h4>Room:</h4>
       <select>
         <option value="addRoom">Add new room</option>
         <option value="lobby">lobby</option>
       </select>
-      </div>
 
-      <form id="messageForm">
-        <input id="inputText" type="text" placeholder="Message here">
-      </form>
-    <button class="chatButton">Submit</button>
 
       <!-- Chatroom !-->
+
+
       <div id="createRoom">
 
       </div>
