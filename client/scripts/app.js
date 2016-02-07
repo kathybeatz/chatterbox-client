@@ -1,5 +1,4 @@
-
-$(document).ready.(function(){
+$(document).ready(function(){
 // var message = {
 //   username: 'kat&liz',
 //   text: 'hi everybody',
@@ -8,21 +7,22 @@ $(document).ready.(function(){
 
 //have an object named app
 var app = {
-roomName = undefined;
-friendsList = {};
+roomName : undefined,
+// friendsList : {},
+server: 'https://api.parse.com/1/classes/chatterbox',
 //metod on app called, init
 init: function(){
   // app.createRoom();
   app.addMessages();
+  app.fetch(app.roomName);
   // app.clearMessages();
   // }
-},
 },
 //method on app called send
 send: function(){
   $.ajax({
   // This is the url you should use to communicate with the parse API server.
-  url: 'https://api.parse.com/1/classes/chatterbox',
+  url: app.server,
   type: 'POST',
   data: JSON.stringify(message),
   contentType: 'application/json',
@@ -39,14 +39,19 @@ send: function(){
 
 //method on app called fetch
 fetch : function(){
+  var $messages = $('#messages');
+
   $.ajax({
   
-   
+  url: 'https://api.parse.com/1/classes/chatterbox',
   type: 'GET',
   data: JSON.stringify(),
   contentType: 'application/json',
   // dataType: "json",
   success: function (data) {
+        $each(data, function(i, message){
+          $messages.append('<li>'+ message.username + ': ' + message.text +'</li>');
+        });
     console.log('chatterbox: Message received');
   },
   error: function (data) {
@@ -69,7 +74,7 @@ addMessages: function(){
 //if user enters a new roomname, it will auto add to dropdown menu
 // app.send();
   $('#chatButton').on('click', function(){
-    var message {};
+    var message={};
     message.username = window.location.search.slice(10);
     message.text = $("#messageInput").val;
     message.roomname = app.roomName;
@@ -95,7 +100,7 @@ enterRoom: function(){
 //select from dropdown menu
 //when user clicks on room name, all messages with matching roomname value are displayed
 
-},
+},      
 
 addFriend: function(){
 //make an empty user friend list
@@ -104,7 +109,8 @@ addFriend: function(){
 },
 showFriendMessages: function(){
 //display all messages from users on friend list in bold 
-},
+}
+};
 
 app.init();
 });
